@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dc4403f698b70dd28426d444cc9ff2a",
+    "content-hash": "8eddc47cdb30844315b71aecabd78c9c",
     "packages": [
         {
             "name": "brick/math",
@@ -1888,10 +1888,6 @@
                 "psr",
                 "psr-14"
             ],
-            "support": {
-                "issues": "https://github.com/php-fig/event-dispatcher/issues",
-                "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
-            },
             "time": "2019-01-08T18:20:26+00:00"
         },
         {
@@ -2194,16 +2190,16 @@
         },
         {
             "name": "sixincode/hive-alpha",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:sixincode/hive-alpha.git",
-                "reference": "99eeff41278ecf2aefcd7df451c7141c0147571f"
+                "reference": "e421d1a57e721616627e7b4b8910c2b0376f1d38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sixincode/hive-alpha/zipball/99eeff41278ecf2aefcd7df451c7141c0147571f",
-                "reference": "99eeff41278ecf2aefcd7df451c7141c0147571f",
+                "url": "https://api.github.com/repos/sixincode/hive-alpha/zipball/e421d1a57e721616627e7b4b8910c2b0376f1d38",
+                "reference": "e421d1a57e721616627e7b4b8910c2b0376f1d38",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2215,6 +2211,7 @@
             "require": {
                 "illuminate/contracts": "^9.0",
                 "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.13.0",
                 "spatie/laravel-schemaless-attributes": "^2.3",
                 "spatie/laravel-sluggable": "^3.4",
                 "spatie/laravel-translatable": "^6.0"
@@ -2227,7 +2224,6 @@
                 "pestphp/pest-plugin-laravel": "^1.1",
                 "phpunit/phpunit": "^9.5"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2283,10 +2279,10 @@
                 "sixincode"
             ],
             "support": {
-                "source": "https://github.com/sixincode/hive-alpha/tree/master",
+                "source": "https://github.com/sixincode/hive-alpha/tree/v1.0.0",
                 "issues": "https://github.com/sixincode/hive-alpha/issues"
             },
-            "time": "2022-09-30T22:44:03+00:00"
+            "time": "2022-10-01T08:49:34+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -5864,10 +5860,6 @@
             "keywords": [
                 "test"
             ],
-            "support": {
-                "issues": "https://github.com/hamcrest/hamcrest-php/issues",
-                "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
-            },
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
@@ -7798,9 +7790,6 @@
                 "request",
                 "response"
             ],
-            "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/master"
-            },
             "time": "2019-04-30T12:38:16+00:00"
         },
         {
@@ -7857,9 +7846,6 @@
                 "request",
                 "response"
             ],
-            "support": {
-                "source": "https://github.com/php-fig/http-message/tree/master"
-            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -7906,10 +7892,6 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "support": {
-                "issues": "https://github.com/ralouphie/getallheaders/issues",
-                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
-            },
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
@@ -9782,9 +9764,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "sixincode/hive-alpha": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
