@@ -1,0 +1,81 @@
+{
+    "name": "sixincode/hive-posts",
+    "description": "Package for Post and Category elements",
+    "keywords": [
+        "sixincode",
+        "laravel",
+        "hive-posts"
+    ],
+    "homepage": "https://github.com/sixincode/hive-posts",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sixincode",
+            "email": "sixincode@6ixin.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^9.0",
+        "sixincode/hive-alpha": "dev-master",
+        "spatie/laravel-package-tools": "^1.13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sixincode\\HivePosts\\": "src",
+            "Sixincode\\HivePosts\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sixincode\\HivePosts\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sixincode\\HivePosts\\HivePostsServiceProvider"
+            ],
+            "aliases": {
+                "HivePosts": "Sixincode\\HivePosts\\Facades\\HivePosts"
+            }
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.packagist.com/sixincode/"
+        },
+        {
+            "packagist.org": false
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
