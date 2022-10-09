@@ -2,8 +2,8 @@
 
 namespace Sixincode\HivePosts;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Sixincode\ModulesInit\Package;
+use Sixincode\ModulesInit\PackageServiceProvider;
 use Sixincode\HivePosts\Commands\HivePostsCommand;
 
 class HivePostsServiceProvider extends PackageServiceProvider

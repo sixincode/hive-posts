@@ -2,9 +2,9 @@
 
 namespace Sixincode\HivePosts\Models;
 
-use Sixincode\HiveAlpha\Models\HiveModelx;
+use Sixincode\HiveAlpha\Models\HiveModelMin;
 
-class Categoryx extends HiveModelx
+class Categoryx extends HiveModelMin
 {
   public function getTable()
   {

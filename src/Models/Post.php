@@ -3,11 +3,21 @@
 namespace Sixincode\HivePosts\Models;
 
 use Sixincode\HiveAlpha\Models\HiveModel;
+use Sixincode\HiveHelpers\Traits\IsActiveTrait;
+use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
+use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
+use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
+use Sixincode\HiveHelpers\Traits\sortOrderTrait;
 use Sixincode\HivePosts\Traits\HasCategories;
 use Sixincode\HivePosts\Traits\HasTags;
 
 class Post extends HiveModel
 {
+  use IsActiveTrait;
+  use IsDefaultTrait;
+  use IsFeaturedTrait;
+  use IsPrivateTrait;
+  use sortOrderTrait;
   use HasCategories;
   use HasTags;
 
@@ -16,44 +26,23 @@ class Post extends HiveModel
 
   $this->casts['title'] = 'array';
   $this->casts['content'] = 'array';
-  $this->casts['is_private'] = 'boolean';
-  $this->casts['is_featured'] = 'boolean';
 
-  public $filterable = [
-    'id',
-    'title',
-    'slug',
-    'views',
-    'url',
-    'is_private',
-    'is_featured',
-    'sort_order',
-    'user_global',
-    'properties',
-  ];
+  $this->filterable[] = 'id';
+  $this->filterable[] = 'title';
+  $this->filterable[] = 'views';
+  $this->filterable[] = 'url';
 
-  public $orderable = [
-    'id',
-    'title',
-    'slug',
-    'views',
-    'url',
-    'sort_order',
-    'user_global',
-    'properties',
-  ];
+  $this->orderable[] = 'id';
+  $this->orderable[] = 'title';
+  $this->orderable[] = 'views';
+
+  $this->fillable[] = 'title';
+  $this->fillable[] = 'content';
+  $this->fillable[] = 'views';
+  $this->fillable[] = 'url';
 
   protected $appends = [
       // 'picture',
-  ];
-
-   protected $fillable = [
-     'title',
-     'content',
-     'url',
-     'is_private',
-     'is_featured',
-     'sort_order',
   ];
 
   public function getTable()

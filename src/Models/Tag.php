@@ -9,38 +9,29 @@ use Illuminate\Database\Eloquent\Collection as DbCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Sixincode\HiveHelpers\Traits\IsActiveTrait;
+use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
 
 class Tag extends HiveModel
 {
+  use IsActiveTrait;
+  use IsDefaultTrait;
+
   $this->translatable[] = 'name';
   $this->translatable[] = 'slug';
 
-  $this->casts = ['name'] = 'array';
-  $this->casts = ['is_private'] = > 'boolean';
-  $this->casts = ['is_featured'] = 'boolean';
+  $this->casts['name'] = 'array';
 
-  public $filterable = [
-    'id',
-    'name' ,
-    'slug',
-    'type',
-    'properties',
-  ];
+  $this->filterable[] = 'id';
+  $this->filterable[] = 'name';
+  $this->filterable[] = 'type';
 
-  public $orderable = [
-    'id',
-    'name' ,
-    'slug',
-    'type',
-    'properties',
-  ];
+  $this->orderable[] = 'id';
+  $this->orderable[] = 'name';
+  $this->orderable[] = 'type';
 
-  public $fillable = [
-    'name' ,
-    'type',
-    'is_private',
-    'is_featured',
-  ];
+  $this->fillable[] = 'name';
+  $this->fillable[] = 'description';
 
   public function getTable()
   {

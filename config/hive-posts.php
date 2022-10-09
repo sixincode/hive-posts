@@ -2,7 +2,8 @@
 
 // config for Sixincode/HivePosts
 return [
-    'name'    => 'Engine',
+    'name' => 'hivePosts',
+    'identification' => 'hive-posts',
     'models'  => [
         'category'                    => Sixincode\HivePosts\Models\Category::class,
         'categoryx'                   => Sixincode\HivePosts\Models\Categoryx::class,
@@ -18,9 +19,6 @@ return [
         'tagsx'                       => 'tagsx',
       ],
     'column_names'    => [
-      'global_key'                    => 'global',
-      'owner_morph_key'               => 'owner_id',
-      'owner_morph_type'              => 'owner_type',
       'categories_morph_category'     => 'category_id',
       'categories_morph_id'           => 'categoryx_id',
       'categories_morph_type'         => 'categoryx_type',
@@ -33,7 +31,7 @@ return [
     ],
     'cache'              => [
         'expiration_time'             => \DateInterval::createFromDateString('24 hours'),
-        'key'                         => 'sixincode.package-post.cache',
+        'key'                         => 'sixincode.hive-posts.cache',
         'model_key'                   => 'name',
         'store'                       => 'default',
     ],

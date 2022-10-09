@@ -2,9 +2,9 @@
 
 namespace Sixincode\HivePosts\Models;
 
-use Sixincode\HiveAlpha\Models\HiveModelx;
+use Sixincode\HiveAlpha\Models\HiveModelMin;
 
-class Tagx extends HiveModelx
+class Tagx extends HiveModelMin
 {
   public function getTable()
   {

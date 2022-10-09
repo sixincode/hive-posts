@@ -44,9 +44,7 @@ trait HasTags
                               self::getTagClassName(),
                               config('hive-posts.column_names.tag_identifier'),
                               config('hive-posts.tables_names.tagsx')
-                          )->withPivot(
-                              config('hive-alpha.column_names.properties')
-                        );
+                          );
   }
 
   public function tagsTranslated(string | null $locale = null): MorphToMany

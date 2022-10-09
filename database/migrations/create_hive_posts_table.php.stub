@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Sixincode\HiveHelpers\Blueprints\MigrationBlueprint as Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -18,53 +18,64 @@ return new class extends Migration
         throw new \Exception('Error: config/hive-posts.php not loaded. Run [php artisan config:clear] and try again.');
       }
 
+
       if(!Schema::hasTable($tableNames['posts'])) {
             Schema::create($tableNames['posts'], function (Blueprint $table) {
               $table->id();
-              $table->json('title');
-              $table->string('slug')->unique();
-              $table->json('content')->nullable();
+              $table->descriptionFieldJson('title');
+              $table->slugFieldJson();
+              $table->descriptionFieldJson('content');
               $table->integer('views')->nullable();
               $table->string('url')->nullable();
-              $table->boolean(config('package-alpha.column_names.is_private'))->default(0);
-              $table->boolean(config('package-alpha.column_names.is_featured'))->default(0);
-              $table->integer(config('package-alpha.column_names.sort_order'))->nullable();
-              $table->string('user_global');
-              $table->schemalessAttributes(config('package-alpha.column_names.properties'))->nullable();
-              $table->schemalessAttributes(config('package-alpha.column_names.data'))->nullable();
-              $table->string(config('package-alpha.column_names.global'))->nullable();
-              $table->timestamps();
+              $table->isFeaturedField();
+              $table->isPrivateField();
+              $table->sortOrderField();
+              $table->globalUserField();
+              $table->propertiesSchemaField();
+              $table->dataSchemaField();
+              $table->globalField();
+              $table->morphToOwner();
               $table->softDeletes();
+              $table->timestamps();
             });
           }
 
       if(!Schema::hasTable($tableNames['categories'])) {
             Schema::create($tableNames['categories'], function (Blueprint $table) {
               $table->id();
-              $table->json('name');
-              $table->json('slug');
-              $table->json('slogan')->nullable();
-              $table->json('description')->nullable();
-              $table->boolean(config('package-alpha.column_names.is_private'))->default(0);
-              $table->boolean(config('package-alpha.column_names.is_featured'))->default(0);
-              $table->integer(config('package-alpha.column_names.sort_order'))->nullable();
+              $table->descriptionFieldJson('name');
+              $table->slugFieldJson();
+              $table->descriptionFieldJson('slogan');
+              $table->descriptionFieldJson();
               $table->integer('level')->nullable();
               $table->string('type')->nullable();
-              $table->schemalessAttributes(config('package-alpha.column_names.properties'))->nullable();
-              $table->schemalessAttributes(config('package-alpha.column_names.data'))->nullable();
-              $table->string(config('package-alpha.column_names.global'))->nullable();
-              $table->timestamps();
+              $table->isFeaturedField();
+              $table->isPrivateField();
+              $table->isActiveField();
+              $table->isDefaultField();
+              $table->sortOrderField();
+              $table->propertiesSchemaField();
+              $table->dataSchemaField();
+              $table->globalField();
               $table->softDeletes();
+              $table->timestamps();
             });
           }
 
         if(!Schema::hasTable($tableNames['categoriesx'])) {
           Schema::create($tableNames['categoriesx'], function (Blueprint $table) {
-              $table->foreignId(config('package-posts.column_names.categories_morph_category'))->constrained($tableNames['categories'])->onDelete('cascade');
-              $table->morphs(config('package-posts.column_names.category_identifier'));
-              $table->schemalessAttributes(config('package-alpha.column_names.properties'))->nullable();
+              $table->foreignId(config('package-posts.column_names.categories_morph_category'))
+                    ->constrained($tableNames['categories'])
+                    ->onDelete('cascade');
 
-              $table->unique([config('package-posts.column_names.categories_morph_category'),config('package-posts.column_names.categories_morph_id'),config('package-posts.column_names.categories_morph_type')]);
+              $table->morphs(config('package-posts.column_names.category_identifier'));
+              $table->propertiesSchemaField();
+
+              $table->unique([
+                config('package-posts.column_names.categories_morph_category'),
+                config('package-posts.column_names.categories_morph_id'),
+                config('package-posts.column_names.categories_morph_type')
+              ]);
             });
           }
 
@@ -72,11 +83,13 @@ return new class extends Migration
             Schema::create($tableNames['tags'], function (Blueprint $table) {
               $table->id();
               $table->json('name');
-              $table->json('slug');
+              $table->slugFieldJson();
               $table->string('type')->nullable();
-              $table->schemalessAttributes(config('package-alpha.column_names.properties'))->nullable();
-              $table->schemalessAttributes(config('package-alpha.column_names.data'))->nullable();
-              $table->string(config('package-alpha.column_names.global'))->nullable();
+              $table->isActiveField();
+              $table->isDefaultField();
+              $table->propertiesSchemaField();
+              $table->dataSchemaField();
+              $table->globalField();
               $table->timestamps();
               $table->softDeletes();
             });
@@ -86,9 +99,12 @@ return new class extends Migration
           Schema::create($tableNames['tagsx'], function (Blueprint $table) {
               $table->foreignId(config('package-posts.column_names.tags_morph_tag'))->constrained($tableNames['tags'])->onDelete('cascade');
               $table->morphs(config('package-posts.column_names.tag_identifier'));
-              $table->schemalessAttributes(config('package-alpha.column_names.properties'))->nullable();
 
-              $table->unique([config('package-posts.column_names.tags_morph_tag'),config('package-posts.column_names.tags_morph_id'),config('package-posts.column_names.tags_morph_type')]);
+              $table->unique([
+                config('package-posts.column_names.tags_morph_tag'),
+                config('package-posts.column_names.tags_morph_id'),
+                config('package-posts.column_names.tags_morph_type')
+              ]);
             });
           }
       }
