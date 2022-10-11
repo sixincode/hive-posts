@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Sixincode\HiveHelpers\Blueprints\MigrationBlueprint as Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
-return new class extends Migration
+class CreateHivePostsTable extends Migration
 {
     public function up()
     {
-      $tableNames  = config('hive-posts.tables_names');
+      $tableNames  = config('hive-posts.table_names');
       $columnNames = config('hive-posts.column_names');
 
       if (empty($tableNames)) {
@@ -23,12 +23,13 @@ return new class extends Migration
             Schema::create($tableNames['posts'], function (Blueprint $table) {
               $table->id();
               $table->descriptionFieldJson('title');
-              $table->slugFieldJson();
+              $table->string('slug')->nullable()->unique();
               $table->descriptionFieldJson('content');
               $table->integer('views')->nullable();
               $table->string('url')->nullable();
               $table->isFeaturedField();
               $table->isPrivateField();
+              $table->isActiveField();
               $table->sortOrderField();
               $table->globalUserField();
               $table->propertiesSchemaField();
@@ -63,18 +64,18 @@ return new class extends Migration
           }
 
         if(!Schema::hasTable($tableNames['categoriesx'])) {
-          Schema::create($tableNames['categoriesx'], function (Blueprint $table) {
-              $table->foreignId(config('package-posts.column_names.categories_morph_category'))
+          Schema::create($tableNames['categoriesx'], function (Blueprint $table) use ($tableNames){
+              $table->foreignId(config('hive-posts.column_names.categories_morph_category'))
                     ->constrained($tableNames['categories'])
                     ->onDelete('cascade');
 
-              $table->morphs(config('package-posts.column_names.category_identifier'));
+              $table->morphs(config('hive-posts.column_names.category_identifier'));
               $table->propertiesSchemaField();
 
               $table->unique([
-                config('package-posts.column_names.categories_morph_category'),
-                config('package-posts.column_names.categories_morph_id'),
-                config('package-posts.column_names.categories_morph_type')
+                config('hive-posts.column_names.categories_morph_category'),
+                config('hive-posts.column_names.categories_morph_id'),
+                config('hive-posts.column_names.categories_morph_type')
               ]);
             });
           }
@@ -96,14 +97,14 @@ return new class extends Migration
           }
 
         if(!Schema::hasTable($tableNames['tagsx'])) {
-          Schema::create($tableNames['tagsx'], function (Blueprint $table) {
-              $table->foreignId(config('package-posts.column_names.tags_morph_tag'))->constrained($tableNames['tags'])->onDelete('cascade');
-              $table->morphs(config('package-posts.column_names.tag_identifier'));
+          Schema::create($tableNames['tagsx'], function (Blueprint $table) use ($tableNames){
+              $table->foreignId(config('hive-posts.column_names.tags_morph_tag'))->constrained($tableNames['tags'])->onDelete('cascade');
+              $table->morphs(config('hive-posts.column_names.tag_identifier'));
 
               $table->unique([
-                config('package-posts.column_names.tags_morph_tag'),
-                config('package-posts.column_names.tags_morph_id'),
-                config('package-posts.column_names.tags_morph_type')
+                config('hive-posts.column_names.tags_morph_tag'),
+                config('hive-posts.column_names.tags_morph_id'),
+                config('hive-posts.column_names.tags_morph_type')
               ]);
             });
           }
@@ -111,7 +112,7 @@ return new class extends Migration
 
       public function down()
       {
-        $tableNames  = config('hive-posts.tables_names');
+        $tableNames  = config('hive-posts.table_names');
         $columnNames = config('hive-posts.column_names');
 
         if (empty($tableNames)) {
@@ -127,6 +128,4 @@ return new class extends Migration
         Schema::dropIfExists($tableNames['tags']);
         Schema::dropIfExists($tableNames['tagsx']);
       }
-
-
 };

@@ -8,6 +8,7 @@ use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
 use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
 use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
 use Sixincode\HiveHelpers\Traits\sortOrderTrait;
+use Sixincode\HiveHelpers\Traits\HasSlugJsonTrait;
 
 class Category extends HiveModel
 {
@@ -16,40 +17,64 @@ class Category extends HiveModel
   use IsFeaturedTrait;
   use IsPrivateTrait;
   use sortOrderTrait;
+  use HasSlugJsonTrait;
 
-  $this->translatable[] = 'title';
-  $this->translatable[] = 'description';
+  public function bootCategory()
+  {
+    $this->translatable[] = 'name';
+    $this->translatable[] = 'slug';
+    $this->translatable[] = 'slogan';
+    $this->translatable[] = 'description';
 
-  $this->casts['title'] = 'array';
-  $this->casts['description'] = 'array';
+    $this->casts['name'] = 'array';
+    $this->casts['slug'] = 'array';
+    $this->casts['slogan'] = 'array';
+    $this->casts['description'] = 'array';
 
-  $this->filterable[] = 'id';
-  $this->filterable[] = 'title';
-  $this->filterable[] = 'type';
-  $this->filterable[] = 'description';
+    $this->filterable[] = 'id';
+    $this->filterable[] = 'name';
+    $this->filterable[] = 'type';
 
-  $this->orderable[] = 'id';
-  $this->orderable[] = 'title';
-  $this->orderable[] = 'slug';
-  $this->orderable[] = 'description';
-  $this->orderable[] = 'type';
+    $this->orderable[] = 'id';
+    $this->orderable[] = 'name';
+    $this->orderable[] = 'type';
 
-  $this->fillable[] = 'title';
-  $this->fillable[] = 'description';
-  $this->fillable[] = 'type';
-
+    $this->fillable[] = 'name';
+    $this->fillable[] = 'slogan';
+    $this->fillable[] = 'description';
+    $this->fillable[] = 'type';
+  }
   protected $appends = [
       // 'picture',
   ];
-  
-  public function getTable()
+
+  protected $orderable = [
+      // 'picture',
+  ];
+
+  protected $filterable = [
+      // 'picture',
+  ];
+
+  protected $fillable = [
+      // 'slug',
+  ];
+
+  protected $translatable = [
+      'name',
+      'slogan',
+      'slug',
+      'description'
+  ];
+
+  public static function getTableAttribute()
   {
     return config('hive-posts.tables_names.categories');
   }
 
-  public function slugOriginElement()
+  public static function slugOriginElement()
   {
-    return 'title';
+    return 'name';
   }
 
 

@@ -17,7 +17,7 @@ class HivePostsServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('hive-posts')
-            ->hasConfigFile()
+            ->hasConfigFile('hive-posts')
             ->hasViews()
             ->hasMigration('create_hive-posts_table')
             ->hasCommand(HivePostsCommand::class);

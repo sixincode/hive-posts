@@ -16,7 +16,7 @@ trait HasTags
 
   public static function getTagClassName(): string
   {
-      return config('hive-posts.models.tags', Tag::class)
+      return config('hive-posts.models.tags', Tag::class);
   }
 
   public static function bootHasTags()
@@ -43,7 +43,7 @@ trait HasTags
       return $this->morphToMany(
                               self::getTagClassName(),
                               config('hive-posts.column_names.tag_identifier'),
-                              config('hive-posts.tables_names.tagsx')
+                              config('hive-posts.table_names.tagsx')
                           );
   }
 
@@ -55,7 +55,7 @@ trait HasTags
           ->morphToMany(
              self::getTagClassName(),
              config('hive-posts.column_names.tag_identifier'),
-             config('hive-posts.tables_names.tagsx')
+             config('hive-posts.table_names.tagsx')
          )->select('*')
           ->selectRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"{$locale}\"')) as name_translated")
           ->selectRaw("JSON_UNQUOTE(JSON_EXTRACT(slug, '$.\"{$locale}\"')) as slug_translated");
@@ -225,10 +225,6 @@ trait HasTags
   protected function syncTagIds($ids, string | null $type = null, $detaching = true): void
   {
       $isUpdated = false;
-      self::getTagClassName(),
-      config('hive-posts.column_names.tag_identifier'),
-      config('hive-posts.tables_names.tagsx')
-
       // Get a list of tag_ids for all current tags
       $current = $this->tags()
           ->newPivotStatement()

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection as DbCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Sixincode\HiveHelpers\Traits\HasSlugJsonTrait;
 use Sixincode\HiveHelpers\Traits\IsActiveTrait;
 use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
 
@@ -16,28 +17,52 @@ class Tag extends HiveModel
 {
   use IsActiveTrait;
   use IsDefaultTrait;
+  use HasSlugJsonTrait;
 
-  $this->translatable[] = 'name';
-  $this->translatable[] = 'slug';
+  public function bootTag()
+  {
+    $this->translatable[] = 'name';
+    $this->translatable[] = 'slug';
 
-  $this->casts['name'] = 'array';
+    $this->casts['name'] = 'array';
+    $this->casts['slug'] = 'array';
 
-  $this->filterable[] = 'id';
-  $this->filterable[] = 'name';
-  $this->filterable[] = 'type';
+    $this->filterable[] = 'id';
+    $this->filterable[] = 'name';
+    $this->filterable[] = 'type';
 
-  $this->orderable[] = 'id';
-  $this->orderable[] = 'name';
-  $this->orderable[] = 'type';
+    $this->orderable[] = 'id';
+    $this->orderable[] = 'name';
+    $this->orderable[] = 'type';
 
-  $this->fillable[] = 'name';
-  $this->fillable[] = 'description';
+    $this->fillable[] = 'name';
+    $this->fillable[] = 'description';
+  }
+  protected $appends = [
+      // 'picture',
+  ];
 
-  public function getTable()
+  protected $orderable = [
+      // 'picture',
+  ];
+
+  protected $filterable = [
+      // 'picture',
+  ];
+
+  protected $fillable = [
+      // 'slug',
+  ];
+
+  protected $translatable = [
+      'name',
+      'slug',
+  ];
+
+  public static function getTableAttribute()
   {
     return config('hive-posts.tables_names.tags');
   }
-
 
   public function scopeWithType(Builder $query, string $type = null): Builder
   {
@@ -125,7 +150,7 @@ class Tag extends HiveModel
       return parent::setAttribute($key, $value);
   }
 
-  public function slugOriginElement()
+  public static function slugOriginElement()
   {
     return 'name';
   }
