@@ -27,13 +27,11 @@ trait HasTags
           }
 
           $elementToTag->attachTags($elementToTag->queuedTags);
-
           $elementToTag->queuedTags = [];
       });
 
       static::deleted(function (Model $deletedModel) {
           $tags = $deletedModel->tags()->get();
-
           $deletedModel->detachTags($tags);
       });
   }

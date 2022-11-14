@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 use Sixincode\HiveHelpers\Traits\HasSlugJsonTrait;
 use Sixincode\HiveHelpers\Traits\IsActiveTrait;
 use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
+use Illuminate\Support\Str;
 
 class Tag extends HiveModel
 {
@@ -19,8 +20,9 @@ class Tag extends HiveModel
   use IsDefaultTrait;
   use HasSlugJsonTrait;
 
-  public function bootTag()
+  public function __construct()
   {
+    parent::__construct();
     $this->translatable[] = 'name';
     $this->translatable[] = 'slug';
 
@@ -37,31 +39,22 @@ class Tag extends HiveModel
 
     $this->fillable[] = 'name';
     $this->fillable[] = 'description';
+    $this->appends[] = 'short_name';
   }
-  protected $appends = [
-      // 'picture',
-  ];
-
-  protected $orderable = [
-      // 'picture',
-  ];
-
-  protected $filterable = [
-      // 'picture',
-  ];
-
-  protected $fillable = [
-      // 'slug',
-  ];
-
-  protected $translatable = [
-      'name',
-      'slug',
-  ];
+  protected $appends = [];
+  protected $orderable = [];
+  protected $filterable = [];
+  protected $fillable = [];
+  protected $translatable = [];
 
   public static function getTableAttribute()
   {
     return config('hive-posts.tables_names.tags');
+  }
+
+  public function getShortNameAttribute()
+  {
+    return Str::limit($this->name,10,'...') ;
   }
 
   public function scopeWithType(Builder $query, string $type = null): Builder
@@ -153,5 +146,10 @@ class Tag extends HiveModel
   public static function slugOriginElement()
   {
     return 'name';
+  }
+
+  public function getRouteKeyName()
+  {
+      return 'slug';
   }
 }

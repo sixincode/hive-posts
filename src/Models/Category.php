@@ -19,15 +19,14 @@ class Category extends HiveModel
   use sortOrderTrait;
   use HasSlugJsonTrait;
 
-  public function bootCategory()
+  public function __construct()
   {
+    parent::__construct();
     $this->translatable[] = 'name';
-    $this->translatable[] = 'slug';
     $this->translatable[] = 'slogan';
     $this->translatable[] = 'description';
 
     $this->casts['name'] = 'array';
-    $this->casts['slug'] = 'array';
     $this->casts['slogan'] = 'array';
     $this->casts['description'] = 'array';
 
@@ -44,32 +43,35 @@ class Category extends HiveModel
     $this->fillable[] = 'description';
     $this->fillable[] = 'type';
   }
-  protected $appends = [
-      // 'picture',
-  ];
-
-  protected $orderable = [
-      // 'picture',
-  ];
-
-  protected $filterable = [
-      // 'picture',
-  ];
-
-  protected $fillable = [
-      // 'slug',
-  ];
-
-  protected $translatable = [
-      'name',
-      'slogan',
-      'slug',
-      'description'
-  ];
+  protected $appends = [];
+  protected $orderable = [];
+  protected $filterable = [];
+  protected $fillable = [];
+  protected $translatable = [];
 
   public static function getTableAttribute()
   {
     return config('hive-posts.tables_names.categories');
+  }
+
+  public function getDetailsArray()
+  {
+    return [
+      "headline"     => $this->name,
+      "body"         => $this->description,
+      "routes"       => self::getRoutingArray(),
+      "icon"         => "categories",
+      "created_at"   => $this->created_at->diffForHumans(),
+      "modified_at"  => $this->modified_at,
+    ];
+  }
+
+  public function getRoutingArray()
+  {
+    return [
+      "index"   => route("categories.index"),
+      "create"  => route("categories.create"),
+    ];
   }
 
   public static function slugOriginElement()
@@ -77,5 +79,9 @@ class Category extends HiveModel
     return 'name';
   }
 
+  public function getRouteKeyName()
+  {
+      return 'slug';
+  }
 
 }
