@@ -71,12 +71,4 @@ Route::middleware(
                  ->name('categories.delete');
           }
     });
-
-
-
-
-
   });
-
-
-});

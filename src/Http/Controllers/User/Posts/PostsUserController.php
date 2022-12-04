@@ -1,6 +1,6 @@
 <?php
 
-namespace Sixincode\HivePosts\Http\Controllers\Posts;
+namespace Sixincode\HivePosts\Http\Controllers\User\Posts;
 
 use Illuminate\Routing\Controller;
 use Sixincode\HivePosts\Models\Post;

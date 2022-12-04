@@ -1,6 +1,6 @@
 <?php
 
-namespace Sixincode\HivePosts\Http\Controllers\Categories;
+namespace Sixincode\HivePosts\Http\Controllers\User\Categories;
 
 use Illuminate\Routing\Controller;
 use Sixincode\HivePosts\Models\Category;
