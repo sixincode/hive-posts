@@ -19,6 +19,7 @@
         "php": "^8.1",
         "illuminate/contracts": "^9.0",
         "sixincode/hive-alpha": "dev-main",
+        "sixincode/hive-stream": "dev-main",
         "sixincode/modules-init": "^1.0"
     },
     "require-dev": {
