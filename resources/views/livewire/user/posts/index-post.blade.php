@@ -3,7 +3,7 @@
    <x-hive-display-card
     :texts='[__("Posts"),]'
     :details='[
-                "create" => ["url" => route("posts.create"), "text" => __("Write Post")],
+                "create" => ["url" => route("user.posts.create"), "text" => __("Write Post")],
               ]
              '
     source='elements'
@@ -16,9 +16,9 @@
           :buttons='["url" => route("posts.show",$post->slug) ]'
           component='posts.postDefault'
           :details='[
-                      "create" => ["url" => route("posts.create"), "text" => __("Publish new")],
-                      "show"   => ["url" => route("posts.show",$post->slug), "text" => __("Show")],
-                      "edit"   => ["url" => route("posts.edit",$post->slug), "text" => __("Edit")]
+                      "create" => ["url" => route("user.posts.create"), "text" => __("Publish new")],
+                      "show"   => ["url" => route("user.posts.show",$post->slug), "text" => __("Show")],
+                      "edit"   => ["url" => route("user.posts.edit",$post->slug), "text" => __("Edit")]
                     ]
                     +$post->getDetailsArray()
                     +$post->getAuthorArray()
