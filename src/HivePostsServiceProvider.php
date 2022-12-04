@@ -54,8 +54,8 @@ class HivePostsServiceProvider extends PackageServiceProvider
     public function bootHivePostsMiddlewares()
     {
       $router = $this->app->make(Router::class);
-      $router->aliasMiddleware('has_post', HivePostsMiddlewares\HiveCommunityUserHasPost::class);
-      $router->aliasMiddleware('allow_posts', HivePostsMiddlewares\HiveCommunityUserAllowPosts::class);
+      $router->aliasMiddleware('has_post', HivePostsMiddlewares\HivePostsUserHasPost::class);
+      $router->aliasMiddleware('allow_posts', HivePostsMiddlewares\HivePostsAllowPosts::class);
     }
 
     public function bootHivePostsLivewireComponents()

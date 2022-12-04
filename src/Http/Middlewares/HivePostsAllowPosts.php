@@ -5,7 +5,7 @@ namespace Sixincode\HivePosts\Http\Middlewares;
 use Illuminate\Http\Request;
 use Closure;
 
-class HiveCommunityUserAllowPosts
+class HivePostsAllowPosts
 {
   public function handle(Request $request, Closure $next)
   {
