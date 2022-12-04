@@ -1,6 +1,6 @@
 <?php
 
-namespace Sixincode\HivePosts\Components\Medias;
+namespace Sixincode\HivePosts\Components\Media;
 
 use Illuminate\View\Component;
 use Sixincode\HivePosts\Models\Post;
