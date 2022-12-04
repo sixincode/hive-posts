@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use Sixincode\HiveCalendar\Http\Controllers\User as Controllers;
-use Sixincode\HiveCalendar\Http\Livewire as Livewires;
-use Sixincode\HiveCalendar\Http\Middlewares as Middlewares;
+use Sixincode\HivePosts\Http\Controllers\User as Controllers;
+use Sixincode\HivePosts\Http\Livewire as Livewires;
+use Sixincode\HivePosts\Http\Middlewares as Middlewares;
 
 Route::middleware(
   config('hive-stream.routes.user.middlewares.default', ['web','auth:web']),
