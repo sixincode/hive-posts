@@ -60,13 +60,13 @@ class HivePostsServiceProvider extends PackageServiceProvider
 
     public function bootHivePostsLivewireComponents()
     {
-      Livewire::component('hive-posts-index-post', HivePostsLivewire\Posts\IndexPost::class);
-      Livewire::component('hive-posts-create-post', HivePostsLivewire\Posts\CreatePost::class);
-      Livewire::component('hive-posts-show-post', HivePostsLivewire\Posts\ShowPost::class);
-      Livewire::component('hive-posts-edit-post', HivePostsLivewire\Posts\EditPost::class);
-      Livewire::component('hive-posts-create-category', HivePostsLivewire\Categories\CreateCategory::class);
-      Livewire::component('hive-posts-show-category', HivePostsLivewire\Categories\ShowCategory::class);
-      Livewire::component('hive-posts-edit-category', HivePostsLivewire\Categories\EditCategory::class);
-      Livewire::component('hive-posts-index-category', HivePostsLivewire\Categories\IndexCategory::class);
+      Livewire::component('hive-posts-user-post-index', HivePostsLivewire\User\Posts\IndexPost::class);
+      Livewire::component('hive-posts-user-post-create', HivePostsLivewire\User\Posts\CreatePost::class);
+      Livewire::component('hive-posts-user-post-show', HivePostsLivewire\User\Posts\ShowPost::class);
+      Livewire::component('hive-posts-user-post-edit', HivePostsLivewire\User\Posts\EditPost::class);
+      Livewire::component('hive-posts-user-category-create', HivePostsLivewire\User\Categories\CreateCategory::class);
+      Livewire::component('hive-posts-user-category-show', HivePostsLivewire\User\Categories\ShowCategory::class);
+      Livewire::component('hive-posts-user-category-edit', HivePostsLivewire\User\Categories\EditCategory::class);
+      Livewire::component('hive-posts-user-category-index', HivePostsLivewire\User\Categories\IndexCategory::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sixincode\HivePosts\Http\Livewire\Posts;
+namespace Sixincode\HivePosts\Http\Livewire\User\Posts;
 
 use Livewire\Component;
 use Sixincode\HivePosts\Models\Post;
@@ -19,7 +19,7 @@ class IndexPost extends Component
 
   public function render()
   {
-    return view('hive-posts::livewire.posts.index-post');
+    return view('hive-posts::livewire.user.posts.index-post');
   }
 
 }

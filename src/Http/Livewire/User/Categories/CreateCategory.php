@@ -1,6 +1,6 @@
 <?php
 
-namespace Sixincode\HivePosts\Http\Livewire\Categories;
+namespace Sixincode\HivePosts\Http\Livewire\User\Categories;
 
 use Livewire\Component;
 use Sixincode\HivePosts\Models\Category;
@@ -22,7 +22,7 @@ class CreateCategory extends Component
 
   public function render()
   {
-    return view('hive-posts::livewire.categories.create-category');
+    return view('hive-posts::livewire.user.categories.create-category');
   }
 
   public function saveCategory()

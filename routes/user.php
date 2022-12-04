@@ -42,54 +42,40 @@ Route::middleware(
     });
 
     Route::middleware(
-      config('hive-calendar.routes.user.middlewares.allow_schedules', ['allow_schedules']),
+      config('hive-posts.routes.user.middlewares.allow_categories', ['allow_categories']),
     )->prefix(
-      config('hive-calendar.routes.user.calendars.prefix', 'calendar')
+      config('hive-posts.routes.user.categories.prefix', 'categories')
     )->group(function () {
 
-      if(config('hive-calendar.routes.user.schedules.index', false))
+      if(config('hive-posts.routes.user.categories.index', false))
         {
-          Route::get('/',  [Controllers\Schedules\SchedulesUserController::class, 'indexUserSchedule'])
-               ->name('schedules.index');
+          Route::get('/',  [Controllers\Categories\CategoriesUserController::class, 'indexUserCategory'])
+               ->name('categories.index');
         }
 
-      if(config('hive-calendar.routes.user.schedules.show', false))
+      if(config('hive-posts.routes.user.categories.create', false))
         {
-          Route::get('/{schedule}',  [Controllers\Schedules\SchedulesController::class, 'showUserSchedule'])
-               ->name('schedules.show');
+          Route::get('/create',  [Controllers\Categories\CategoriesUserController::class, 'createUserCategory'])
+               ->name('categories.create');
         }
 
+      if(config('hive-posts.routes.user.categories.show', false))
+        {
+          Route::get('/{category}',  [Controllers\Categories\CategoriesUserController::class, 'showUserCategory'])
+               ->name('categories.show');
+        }
+
+        if(config('hive-posts.routes.user.categories.delete', false))
+          {
+            Route::get('/{category}/delete',  [Controllers\Categories\CategoriesUserController::class, 'deleteUserCategory'])
+                 ->name('categories.delete');
+          }
     });
 
-    Route::middleware(
-      config('hive-calendar.routes.user.middlewares.allow_events', ['allow_events']),
-    )->prefix(
-      config('hive-calendar.routes.user.events.prefix', 'events')
-    )->group(function () {
 
-    if(config('hive-calendar.routes.user.events.index', false))
-      {
-        Route::get('/',  [Controllers\Events\EventsController::class, 'indexUserEvent'])
-              ->name('events.index');
-      }
 
-    if(config('hive-calendar.routes.user.events.create', false))
-      {
-        Route::get('/create',  [Controllers\Events\EventsController::class, 'createUserEvent'])
-              ->name('events.create');
-      }
 
-    if(config('hive-calendar.routes.user.events.show', false))
-      {
-        Route::get('/{event}',  [Controllers\Events\EventsController::class, 'showUserEvent'])
-              ->name('events.show');
-      }
 
-    if(config('hive-calendar.routes.user.events.delete', false))
-      {
-        Route::get('/{event}/delete',  [Controllers\Events\EventsController::class, 'deleteUserEvent'])
-              ->name('events.delete');
-      }
   });
 
 

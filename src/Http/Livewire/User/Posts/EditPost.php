@@ -1,11 +1,11 @@
 <?php
 
-namespace Sixincode\HivePosts\Http\Livewire\Posts;
+namespace Sixincode\HivePosts\Http\Livewire\User\Posts;
 
 use Livewire\Component;
 use Sixincode\HivePosts\Models\Post;
 
-class ShowPost extends Component
+class EditPost extends Component
 {
   public Post $post;
 
@@ -16,7 +16,7 @@ class ShowPost extends Component
 
   public function render()
   {
-    return view('hive-posts::livewire.posts.show-post');
+    return view('hive-posts::livewire.user.posts.edit-post');
   }
 
 }

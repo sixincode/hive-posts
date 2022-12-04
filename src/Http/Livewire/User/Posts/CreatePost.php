@@ -1,6 +1,6 @@
 <?php
 
-namespace Sixincode\HivePosts\Http\Livewire\Posts;
+namespace Sixincode\HivePosts\Http\Livewire\User\Posts;
 
 use Livewire\Component;
 use Sixincode\HivePosts\Models\Post;
@@ -53,7 +53,7 @@ class CreatePost extends Component
 
   public function render()
   {
-    return view('hive-posts::livewire.posts.create-post');
+    return view('hive-posts::livewire.user.posts.create-post');
   }
 
   public function savePost()
