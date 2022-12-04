@@ -6,26 +6,11 @@ use Livewire\Livewire;
 use Sixincode\ModulesInit\Package;
 use Sixincode\ModulesInit\PackageServiceProvider;
 use Sixincode\HivePosts\Commands\HivePostsCommand;
-use Sixincode\HivePosts\Http\Livewire\Categories\CreateCategory;
-use Sixincode\HivePosts\Http\Livewire\Categories\ShowCategory;
-use Sixincode\HivePosts\Http\Livewire\Categories\EditCategory;
-use Sixincode\HivePosts\Http\Livewire\Categories\IndexCategory;
-use Sixincode\HivePosts\Http\Livewire\Posts\IndexPost;
-use Sixincode\HivePosts\Http\Livewire\Posts\CreatePost;
-use Sixincode\HivePosts\Http\Livewire\Posts\ShowPost;
-use Sixincode\HivePosts\Http\Livewire\Posts\EditPost;
-use Sixincode\HivePosts\Components\Posts\CreatePostAddTaxonomy;
-use Sixincode\HivePosts\Components\Posts\CreatePostOverview;
-use Sixincode\HivePosts\Components\Posts\CreatePostStickyPanel;
-use Sixincode\HivePosts\Components\Categories\AddCategory;
-use Sixincode\HivePosts\Components\Tags\AddTag;
-use Sixincode\HivePosts\Components\Seo\AddSeo;
-use Sixincode\HivePosts\Components\Owner\AddOwner;
-use Sixincode\HivePosts\Components\Urls\AddUrl;
-use Sixincode\HivePosts\Components\Medias\AddImage;
-use Sixincode\HivePosts\Components\Medias\AddMedia;
-use Sixincode\HivePosts\Components\Fragments\AddFragment;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Sixincode\HivePosts\Http\Livewire as HivePostsLivewire;
+use Sixincode\HivePosts\Components as HivePostsComponents;
+use Sixincode\HivePosts\Http\Middlewares as HivePostsMiddlewares;
+use Illuminate\Routing\Router;
 
 class HivePostsServiceProvider extends PackageServiceProvider
 {
@@ -35,19 +20,20 @@ class HivePostsServiceProvider extends PackageServiceProvider
             ->name('hive-posts')
             ->hasConfigFile('hive-posts')
             ->hasViews()
+            ->hasRoutes(['web','user'])
             ->hasViewComponents(
               'hive-posts',
-              CreatePostAddTaxonomy::class,
-              CreatePostOverview::class,
-              CreatePostStickyPanel::class,
-              AddCategory::class,
-              AddFragment::class,
-              AddMedia::class,
-              AddSeo::class,
-              AddTag::class,
-              AddOwner::class,
-              AddUrl::class,
-              AddImage::class,
+              HivePostsComponents\Posts\CreatePostAddTaxonomy::class,
+              HivePostsComponents\Posts\CreatePostOverview::class,
+              HivePostsComponents\Posts\CreatePostStickyPanel::class,
+              HivePostsComponents\Categories\AddCategory::class,
+              HivePostsComponents\Fragements\AddFragment::class,
+              HivePostsComponents\Media\AddMedia::class,
+              HivePostsComponents\Seo\AddSeo::class,
+              HivePostsComponents\Tags\AddTag::class,
+              HivePostsComponents\Owner\AddOwner::class,
+              HivePostsComponents\Urls\AddUrl::class,
+              HivePostsComponents\Media\AddImage::class,
               )
             ->hasMigration('create_hive-posts_table')
             ->hasCommand(HivePostsCommand::class);
@@ -55,20 +41,32 @@ class HivePostsServiceProvider extends PackageServiceProvider
 
     public function bootingPackage()
     {
-      Livewire::component('hive-posts-index-post', IndexPost::class);
-      Livewire::component('hive-posts-create-post', CreatePost::class);
-      Livewire::component('hive-posts-show-post', ShowPost::class);
-      Livewire::component('hive-posts-edit-post', EditPost::class);
-      Livewire::component('hive-posts-create-category', CreateCategory::class);
-      Livewire::component('hive-posts-show-category', ShowCategory::class);
-      Livewire::component('hive-posts-edit-category', EditCategory::class);
-      Livewire::component('hive-posts-index-category', IndexCategory::class);
-
+      $this->bootHivePostsLivewireComponents();
+      $this->bootHivePostsMiddlewares();
       Relation::enforceMorphMap([
           'HivePosts\Post' => 'Sixincode\HivePosts\Models\Post',
           'HivePosts\Category' => 'Sixincode\HivePosts\Models\Category',
           'HivePosts\Tag' => 'Sixincode\HivePosts\Models\Tag',
           'HivePosts\Tagx' => 'Sixincode\HivePosts\Models\Tag',
       ]);
+    }
+
+    public function bootHivePostsMiddlewares()
+    {
+      $router = $this->app->make(Router::class);
+      $router->aliasMiddleware(config('hive-posts.routes.user.middlewares.has_post', 'has_post'), HivePostsMiddlewares\HiveCommunityUserHasPost::class);
+      $router->aliasMiddleware(config('hive-posts.routes.user.middlewares.allow_posts', 'allow_posts'), HivePostsMiddlewares\HiveCommunityUserAllowPosts::class);
+    }
+
+    public function bootHivePostsLivewireComponents()
+    {
+      Livewire::component('hive-posts-index-post', HivePostsLivewire\Posts\IndexPost::class);
+      Livewire::component('hive-posts-create-post', HivePostsLivewire\Posts\CreatePost::class);
+      Livewire::component('hive-posts-show-post', HivePostsLivewire\Posts\ShowPost::class);
+      Livewire::component('hive-posts-edit-post', HivePostsLivewire\Posts\EditPost::class);
+      Livewire::component('hive-posts-create-category', HivePostsLivewire\Categories\CreateCategory::class);
+      Livewire::component('hive-posts-show-category', HivePostsLivewire\Categories\ShowCategory::class);
+      Livewire::component('hive-posts-edit-category', HivePostsLivewire\Categories\EditCategory::class);
+      Livewire::component('hive-posts-index-category', HivePostsLivewire\Categories\IndexCategory::class);
     }
 }
