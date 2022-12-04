@@ -20,7 +20,7 @@ class HivePostsServiceProvider extends PackageServiceProvider
             ->name('hive-posts')
             ->hasConfigFile('hive-posts')
             ->hasViews()
-            ->hasRoutes(['web','user'])
+            ->hasRoutes(['web','user','api'])
             ->hasViewComponents(
               'hive-posts',
               HivePostsComponents\Posts\CreatePostAddTaxonomy::class,
@@ -54,8 +54,8 @@ class HivePostsServiceProvider extends PackageServiceProvider
     public function bootHivePostsMiddlewares()
     {
       $router = $this->app->make(Router::class);
-      $router->aliasMiddleware(config('hive-posts.routes.user.middlewares.has_post', 'has_post'), HivePostsMiddlewares\HiveCommunityUserHasPost::class);
-      $router->aliasMiddleware(config('hive-posts.routes.user.middlewares.allow_posts', 'allow_posts'), HivePostsMiddlewares\HiveCommunityUserAllowPosts::class);
+      $router->aliasMiddleware('has_post', HivePostsMiddlewares\HiveCommunityUserHasPost::class);
+      $router->aliasMiddleware('allow_posts', HivePostsMiddlewares\HiveCommunityUserAllowPosts::class);
     }
 
     public function bootHivePostsLivewireComponents()
