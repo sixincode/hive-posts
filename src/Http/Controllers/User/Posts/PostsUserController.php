@@ -17,12 +17,14 @@ class PostsUserController extends Controller
     return view('hive-posts::user.posts.createUserPost');
   }
 
-  public function showUserPost()
+  public function showUserPost($post)
   {
-    return view('hive-posts::user.posts.showUserPost');
+    return view('hive-posts::user.posts.showUserPost',[
+      'post' => $post
+    ]);
   }
 
-  public function deleteUserPost()
+  public function deleteUserPost($post)
   {
 
   }

@@ -29,4 +29,21 @@ trait HasCategories
                   );
    }
 
+
+   public function attachCategories(array | ArrayAccess | Category $categories): static
+   {
+       $className = static::getCategoryClassName();
+
+       $categoriesIds = Category::whereIn('slug',$this->categories)->pluck('id')->toArray();
+
+       $this->categories()->syncWithoutDetaching($categoriesIds);
+
+       return $this;
+   }
+
+   public function getCategories( )
+   {
+       return $this->categories()->pluck('name','slug')->toArray();
+   }
+
 }

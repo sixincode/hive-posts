@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateHivePostsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -23,7 +23,7 @@ class CreateHivePostsTable extends Migration
             Schema::create($tableNames['posts'], function (Blueprint $table) {
               $table->id();
               $table->descriptionFieldJson('title');
-              $table->slugField();
+              $table->string('slug')->nullable()->unique();
               $table->descriptionFieldJson('content');
               $table->integer('views')->nullable();
               $table->string('url')->nullable();
@@ -37,6 +37,7 @@ class CreateHivePostsTable extends Migration
               $table->globalField();
               $table->morphToOwner();
               $table->softDeletes();
+              $table->seoField();
               $table->timestamps();
             });
           }
@@ -45,7 +46,7 @@ class CreateHivePostsTable extends Migration
             Schema::create($tableNames['categories'], function (Blueprint $table) {
               $table->id();
               $table->descriptionFieldJson('name');
-              $table->slugFieldJson();
+              $table->slugField();
               $table->descriptionFieldJson('slogan');
               $table->descriptionFieldJson();
               $table->integer('level')->nullable();
@@ -55,10 +56,12 @@ class CreateHivePostsTable extends Migration
               $table->isActiveField();
               $table->isDefaultField();
               $table->sortOrderField();
+              $table->globalUserField();
               $table->propertiesSchemaField();
               $table->dataSchemaField();
               $table->globalField();
               $table->softDeletes();
+              $table->seoField();
               $table->timestamps();
             });
           }
@@ -88,6 +91,7 @@ class CreateHivePostsTable extends Migration
               $table->string('type')->nullable();
               $table->isActiveField();
               $table->isDefaultField();
+              $table->globalUserField();
               $table->propertiesSchemaField();
               $table->dataSchemaField();
               $table->globalField();
@@ -108,51 +112,6 @@ class CreateHivePostsTable extends Migration
               ]);
             });
           }
-
-          if(!Schema::hasTable($tableNames['bookmarks'])) {
-                Schema::create($tableNames['bookmarks'], function (Blueprint $table) {
-                  $table->id();
-                  $table->slugField();
-                  $table->string('type')->nullable();
-                  $table->morphs('element');
-                  $table->foreignId('collection_id')->nullable();
-                  $table->softDeletes();
-                  $table->date('added_on');
-                });
-              }
-
-          if(!Schema::hasTable($tableNames['collections'])) {
-                Schema::create($tableNames['collections'], function (Blueprint $table) {
-                  $table->id();
-                  $table->slugField();
-                  $table->string('name');
-                  $table->descriptionFieldJson('description');
-                  $table->integer('type')->default(1);
-                  $table->bool('is_auto')->default(0);
-                  $table->bool('match_all')->default(0);
-                  $table->string('sort',8)->nullable();
-                  $table->isPrivateField();
-                  $table->globalUserField();
-                  $table->propertiesSchemaField();
-                  $table->dataSchemaField();
-                  $table->globalField();
-                  $table->morphToOwner();
-                  $table->softDeletes();
-                  $table->timestamps();
-                });
-              }
-
-          if(!Schema::hasTable($tableNames['collection_rules'])) {
-                Schema::create($tableNames['collection_rules'], function (Blueprint $table) {
-                  $table->id();
-                  $table->slugField();
-                  $table->string('rule');
-                  $table->string('operator');
-                  $table->string('value');
-                  $table->foreignId('collection_id')->nullable();
-
-                });
-              }
       }
 
       public function down()
@@ -172,7 +131,7 @@ class CreateHivePostsTable extends Migration
         Schema::dropIfExists($tableNames['categoriesx']);
         Schema::dropIfExists($tableNames['tags']);
         Schema::dropIfExists($tableNames['tagsx']);
-        Schema::dropIfExists($tableNames['collections']);
-        Schema::dropIfExists($tableNames['collection_rules']);
       }
+
+
 };

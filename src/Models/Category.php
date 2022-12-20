@@ -8,7 +8,7 @@ use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
 use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
 use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
 use Sixincode\HiveHelpers\Traits\sortOrderTrait;
-use Sixincode\HiveHelpers\Traits\HasSlugJsonTrait;
+use Sixincode\HiveHelpers\Traits\HasSlugTrait;
 
 class Category extends HiveModel
 {
@@ -17,7 +17,7 @@ class Category extends HiveModel
   use IsFeaturedTrait;
   use IsPrivateTrait;
   use sortOrderTrait;
-  use HasSlugJsonTrait;
+  use HasSlugTrait;
 
   public function __construct()
   {

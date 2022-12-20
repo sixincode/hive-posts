@@ -7,14 +7,30 @@ use Sixincode\HivePosts\Models\Tag;
 
 trait HasSeo
 {
-  public array $seo;
+  public $seo_title;
+  public $seo_description;
 
   public function mountHasSeo()
   {
-    $this->seo = [
-      'title' => '',
-      'body' => '',
-      'url' => '',
-    ];
+    $this->seo_title = '';
+    $this->seo_description = '';
+  }
+
+  public function saveElementHasSeo()
+  {
+    $elementSaving->seo_title = $this->seo_title ;
+    $elementSaving->seo_description = $this->seo_description ;
+  }
+
+  public function viewElementHasSeo($elementViewing)
+  {
+    $this->seo_title = $elementViewing->seo_title;
+    $this->seo_description = $elementViewing->seo_description;
+  }
+
+  public function editElementHasSeo($elementEditing)
+  {
+    $this->seo_title = $elementEditing->seo_title;
+    $this->seo_description = $elementEditing->seo_description;
   }
 }

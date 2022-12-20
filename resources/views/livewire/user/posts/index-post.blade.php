@@ -13,13 +13,13 @@
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
     @foreach($posts as $post)
       <x-hive-display-card
-          :buttons='["url" => route("posts.show",$post->slug) ]'
+          :buttons='["url" => route("user.posts.show",$post->slug) ]'
           component='posts.postDefault'
           :details='[
                       "create" => ["url" => route("user.posts.create"), "text" => __("Publish new")],
                       "show"   => ["url" => route("user.posts.show",$post->slug), "text" => __("Show")],
-                      "edit"   => ["url" => route("user.posts.edit",$post->slug), "text" => __("Edit")]
-                    ]
+                      "edit"   => ["url" => route("user.posts.show",$post->slug), "text" => __("Show")],
+                     ]
                     +$post->getDetailsArray()
                     +$post->getAuthorArray()
                     '

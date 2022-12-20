@@ -47,7 +47,7 @@ class Post extends HiveModel
     $this->fillable[] = 'global';
     $this->fillable[] = 'user_global';
     $this->fillable[] = 'sort_order';
-    
+
     $this->appends[] = 'short_name';
   }
 
@@ -82,8 +82,8 @@ class Post extends HiveModel
   public function getRoutingArray()
   {
     return [
-      "index"   => route("posts.index"),
-      "create"  => route("posts.create"),
+      "index"   => route("user.posts.index"),
+      "create"  => route("user.posts.create"),
     ];
   }
 

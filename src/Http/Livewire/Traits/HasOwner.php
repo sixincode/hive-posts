@@ -11,22 +11,25 @@ trait HasOwner
 
   public function mountHasOwner()
   {
-    $this->listsForFields['owners'] = [];
-
-    $this->author = 'johndoe';
-
+    $this->listsForFields['authors'] = [];
+    $this->author = null;
   }
 
   public function saveElementHasOwner($elementSaving)
   {
-    // dd($elementSaving);
     // $elementSaving = $elementSaving->update(['views' => $this->author]);
-    return $elementSaving;
-
+    return $elementSaving->owner()->save($author);
   }
 
-  public function setAuthor()
+  public function viewElementHasOwner($elementViewing)
   {
-    // $this->template = 'default';
+    // $elementSaving = $elementSaving->update(['views' => $this->author]);
+    return $this->author = $elementViewing->owner();
+  }
+
+  public function editElementHasOwner($elementEditing)
+  {
+    $this->listsForFields['authors'] = [];
+    return $this->author = $elementViewing->owner();
   }
 }

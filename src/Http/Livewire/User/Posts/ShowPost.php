@@ -7,11 +7,11 @@ use Sixincode\HivePosts\Models\Post;
 
 class ShowPost extends Component
 {
-  public Post $post;
+  public $post;
 
-  public function mount($post = null)
+  public function mount(Post $post = null)
   {
-    $this->post = $post;
+    $this->post = $post->load(['categories','tags']);
   }
 
   public function render()
