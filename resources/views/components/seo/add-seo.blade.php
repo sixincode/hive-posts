@@ -1,3 +1,7 @@
+@props([
+'title'=>'',
+'content'=>''
+])
 <div>
   <div class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-600 dark:to-slate-700 h-auto flex flex-col rounded-md overflow-hidden shadow">
         <div class="overflow-hidden border border-slate-200 dark:border-slate-600 border-opacity-75 rounded-lg h-full">
@@ -10,11 +14,15 @@
             </div>
             <div class="w-full h-full overflow-auto p-4">
                 <div class="flex flex-col">
-                    <h3 class="font-semibold text-blue-600 leading-6">
-                      Unde illo sapiente
-                    </h3>
-                    <span class="mt-1 text-green-600 dark:text-green-400 text-sm leading-5 truncate">http://ngodere.com/products/est-adipisci-adipisc</span>
-                    <p class="mt-1 text-slate-500 dark:text-slate-400 text-sm leading-5 text-whitespace-no-wrap">Id quia voluptates e</p>
+                    <div class="font-semibold text-blue-600 leading-6">
+                      {{$title ?? ''}}
+                    </div>
+                    <div class="mt-1 text-green-600 dark:text-green-400 text-sm leading-5 truncate">
+                      {{$url ?? ''}}
+                    </div>
+                    <div class="mt-1 text-slate-500 dark:text-slate-400 text-sm leading-5 text-whitespace-no-wrap">
+                      {{$content ?? ''}}
+                    </div>
                 </div>
             </div>
         </div>

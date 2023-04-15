@@ -1,11 +1,11 @@
 <?php
 
-namespace Sixincode\HivePosts\Components\Posts;
+namespace Sixincode\HivePosts\Components\Posts\User;
 
 use Illuminate\View\Component;
 use Sixincode\HivePosts\Models\Category;
 
-class CreatePostAddTaxonomy extends Component
+class CreatePostTaxonomy extends Component
 {
   public $categories = [];
   public $listsForFields = [];
@@ -18,9 +18,9 @@ class CreatePostAddTaxonomy extends Component
     $this->categories  = $categories;
     $this->listsForFields  = $listsForFields;
   }
-  
+
   public function render()
   {
-      return view('hive-posts::components.posts.create-post-add-taxonomy');
+      return view('hive-posts::components.posts.user.create-post-taxonomy');
   }
 }

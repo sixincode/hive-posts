@@ -12,13 +12,15 @@ trait HasOwner
   public function mountHasOwner()
   {
     $this->listsForFields['authors'] = [];
-    $this->author = null;
+    $this->author = auth()->user();
   }
 
   public function saveElementHasOwner($elementSaving)
   {
     // $elementSaving = $elementSaving->update(['views' => $this->author]);
-    return $elementSaving->owner()->save($author);
+    // return $elementSaving->owner()->save($this->author);
+    // $this->author->posts()->save($elementSaving);
+      return $elementSaving;
   }
 
   public function viewElementHasOwner($elementViewing)

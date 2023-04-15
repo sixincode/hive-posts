@@ -23,7 +23,7 @@ return new class extends Migration
             Schema::create($tableNames['posts'], function (Blueprint $table) {
               $table->id();
               $table->descriptionFieldJson('title');
-              $table->string('slug')->nullable()->unique();
+              $table->slugField();
               $table->descriptionFieldJson('content');
               $table->integer('views')->nullable();
               $table->string('url')->nullable();

@@ -9,12 +9,10 @@ use Sixincode\HivePosts\Models\Tag;
 class IndexPost extends Component
 {
   public $posts;
-  public $tags;
 
   public function mount($posts = null)
   {
-    $this->posts = Post::all();
-    $this->tags  = Tag::all();
+    $this->posts = Post::all()->sortByDesc('created_at');
   }
 
   public function render()

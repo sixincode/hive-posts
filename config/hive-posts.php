@@ -55,6 +55,7 @@ return [
                 'index'  => true,
                 'show'   => true,
                 'create' => true,
+                'edit' => true,
                 'delete' => true,
               ],
        ],
@@ -104,6 +105,7 @@ return [
                'index'  => true,
                'show'   => true,
                'create' => true,
+               'edit' => true,
                'delete' => true,
              ],
              'bookmarks' => [

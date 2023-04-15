@@ -8,12 +8,14 @@ use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
 use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
 use Sixincode\HiveHelpers\Traits\sortOrderTrait;
 use Sixincode\HiveHelpers\Traits\HasSlugTrait;
+use Sixincode\HiveHelpers\Traits\HasOwnerTrait;
 use Sixincode\HivePosts\Traits\HasCategories;
 use Sixincode\HivePosts\Traits\HasTags;
 use Illuminate\Support\Str;
 
 class Post extends HiveModel
 {
+  use HasOwnerTrait;
   use IsActiveTrait;
   use IsFeaturedTrait;
   use IsPrivateTrait;
@@ -21,6 +23,8 @@ class Post extends HiveModel
   use HasSlugTrait;
   use HasCategories;
   use HasTags;
+
+  protected $with = ['categories', 'tags'];
 
   public function __construct()
   {

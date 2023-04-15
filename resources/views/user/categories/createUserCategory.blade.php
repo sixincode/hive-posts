@@ -1,3 +1,3 @@
 <x-hive-display-layout-app>
-  <livewire:hive-posts-user-category-create />
+  <livewire:hive-posts-user-categories-create />
 </x-hive-display-layout-app>

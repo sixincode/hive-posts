@@ -1,7 +1,7 @@
 <div>
   <x-hive-display-card component='pollen'>
-    <x-hive-form-accordion name='componentOptions' options='["form","link"]' active='link' class="divide-y">
-      <x-hive-form-accordion-item name='{{_("Link")}}' headerClass="rounded-t-lg" id='link'>
+    <x-hive-display-accordion name='componentOptions' options='["form","link"]' active='link' class="divide-y">
+      <x-hive-display-accordion-item name='{{_("Link")}}' headerClass="rounded-t-lg" id='link'>
         <x-slot name="header">
           <x-hive-form-icon
            path='link'
@@ -89,9 +89,9 @@
            </div>
          </x-slot>
 
-       </x-hive-form-accordion-item>
+       </x-hive-display-accordion-item>
 
-       <x-hive-form-accordion-item name='{{_("Media")}}' headerClass="" id='media'>
+       <x-hive-display-accordion-item name='{{_("Media")}}' headerClass="" id='media'>
          <x-slot name="header">
            <x-hive-form-icon
             path='media'
@@ -108,8 +108,8 @@
             </div>
           </x-slot>
 
-        </x-hive-form-accordion-item>
-        <x-hive-form-accordion-item name='{{_("Form")}}'  id='form'>
+        </x-hive-display-accordion-item>
+        <x-hive-display-accordion-item name='{{_("Form")}}'  id='form'>
           <x-slot name="header">
             <x-hive-form-icon
              path='form'
@@ -126,8 +126,8 @@
              </div>
            </x-slot>
 
-         </x-hive-form-accordion-item>
-         <x-hive-form-accordion-item name='{{_("Poll")}}'  id='poll'>
+         </x-hive-display-accordion-item>
+         <x-hive-display-accordion-item name='{{_("Poll")}}'  id='poll'>
            <x-slot name="header">
              <x-hive-form-icon
               path='poll'
@@ -144,7 +144,7 @@
               </div>
             </x-slot>
 
-          </x-hive-form-accordion-item>
-     </x-hive-form-accordion>
+          </x-hive-display-accordion-item>
+     </x-hive-display-accordion>
   </x-hive-display-card >
 </div>

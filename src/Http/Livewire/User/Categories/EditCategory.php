@@ -7,9 +7,9 @@ use Sixincode\HivePosts\Models\Category;
 
 class EditCategory extends Component
 {
-  public Category $category;
+  public $category;
 
-  public function mount($category = null)
+  public function mount(Category $category = null)
   {
     $this->category = $category;
   }

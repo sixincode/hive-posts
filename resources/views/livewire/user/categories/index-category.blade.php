@@ -3,7 +3,7 @@
    <x-hive-display-card
     :texts='[__("Categories"),]'
     :details='[
-                "create" => ["url" => route("categories.create"), "text" => __("New Category")],
+                "create" => ["url" => route("user.categories.create"), "text" => __("New Category")],
               ]
              '
     source='elements'
@@ -13,12 +13,12 @@
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
     @foreach($categories as $category)
       <x-hive-display-card
-          :buttons='["url" => route("categories.show",$category->slug) ]'
+          :buttons='["url" => route("user.categories.show",$category->slug) ]'
           component='posts.postDefault '
           :details='[
-                      "create" => ["url" => route("categories.create"), "text" => __("Publish new")],
-                      "show"   => ["url" => route("categories.show",$category->slug), "text" => __("Show")],
-                      "edit"   => ["url" => route("categories.edit",$category->slug), "text" => __("Edit")]
+                      "create" => ["url" => route("user.categories.create"), "text" => __("Publish new")],
+                      "show"   => ["url" => route("user.categories.show",$category->slug), "text" => __("Show")],
+                      "edit"   => ["url" => route("user.categories.show",$category->slug), "text" => __("Edit")]
                     ]
                     +$category->getDetailsArray()
                     +$category->getAuthorArray()

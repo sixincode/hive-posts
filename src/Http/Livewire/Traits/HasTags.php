@@ -11,7 +11,7 @@ trait HasTags
 
   public function mountHasTags()
   {
-    $this->listsForFields['tags'] = Tag::pluck('name')->toArray();
+    $this->listsForFields['tags'] = Tag::pluck('name','slug')->toArray();
     $this->tags = [];
   }
 
@@ -23,12 +23,12 @@ trait HasTags
 
   public function viewElementHasTags($elementViewing)
   {
-    $this->tags = $elementViewing->tags();
+    return $this->tags = $elementViewing->tags();
   }
 
   public function editElementHasTags($elementEditing)
   {
     $this->listsForFields['tags'] = Tag::pluck('name','slug')->toArray();
-    $this->tags = $elementEditing->tags();
+    $this->viewElementHasTags($elementEditing);
   }
 }

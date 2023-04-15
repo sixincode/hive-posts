@@ -91,7 +91,7 @@
              <ul role="list" class="mt-2 leading-8">
                @foreach($post->categories as $category)
                <li class="inline">
-                 <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5">
+                 <a href="{{route('user.categories.show', $category->slug)}}" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5">
                    <div class="absolute flex flex-shrink-0 items-center justify-center">
                      <span class="h-1.5 w-1.5 rounded-full bg-rose-500" aria-hidden="true"></span>
                    </div>

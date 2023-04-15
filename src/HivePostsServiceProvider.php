@@ -2,15 +2,14 @@
 
 namespace Sixincode\HivePosts;
 
-use Livewire\Livewire;
 use Sixincode\ModulesInit\Package;
 use Sixincode\ModulesInit\PackageServiceProvider;
 use Sixincode\HivePosts\Commands\HivePostsCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Sixincode\HivePosts\Http\Livewire as HivePostsLivewire;
-use Sixincode\HivePosts\Components as HivePostsComponents;
 use Sixincode\HivePosts\Http\Middlewares as HivePostsMiddlewares;
+use Livewire\Livewire;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
 
 class HivePostsServiceProvider extends PackageServiceProvider
 {
@@ -18,32 +17,17 @@ class HivePostsServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('hive-posts')
-            ->hasConfigFile('hive-posts')
-            ->hasViews()
+            ->hasConfigFile(['hive-posts','hive-posts-components'])
             ->hasRoutes(['web','user','api'])
-            ->hasViewComponents(
-              'hive-posts',
-              HivePostsComponents\Posts\CreatePostAddTaxonomy::class,
-              HivePostsComponents\Posts\CreatePostOverview::class,
-              HivePostsComponents\Posts\CreatePostStickyPanel::class,
-              HivePostsComponents\Categories\AddCategory::class,
-              HivePostsComponents\Fragements\AddFragment::class,
-              HivePostsComponents\Media\AddMedia::class,
-              HivePostsComponents\Seo\AddSeo::class,
-              HivePostsComponents\Tags\AddTag::class,
-              HivePostsComponents\Owner\AddOwner::class,
-              HivePostsComponents\Urls\AddUrl::class,
-              HivePostsComponents\Media\AddImage::class,
-              )
+            ->hasViews()
             ->hasMigration('create_hive-posts_table')
             ->hasCommand(HivePostsCommand::class);
     }
 
     public function bootingPackage()
     {
-      $this->bootHivePostsLivewireComponents();
       $this->bootHivePostsMiddlewares();
-      Relation::enforceMorphMap([
+      Relation::morphMap([
           'HivePosts\Post' => 'Sixincode\HivePosts\Models\Post',
           'HivePosts\Category' => 'Sixincode\HivePosts\Models\Category',
           'HivePosts\Tag' => 'Sixincode\HivePosts\Models\Tag',
@@ -51,22 +35,35 @@ class HivePostsServiceProvider extends PackageServiceProvider
       ]);
     }
 
+    public function packageBooted()
+    {
+      $this->bootHivePostsBladeAndLivewireComponents();
+    }
+
     public function bootHivePostsMiddlewares()
     {
       $router = $this->app->make(Router::class);
       $router->aliasMiddleware('has_post', HivePostsMiddlewares\HivePostsUserHasPost::class);
       $router->aliasMiddleware('allow_posts', HivePostsMiddlewares\HivePostsAllowPosts::class);
+      $router->aliasMiddleware('allow_categories', HivePostsMiddlewares\HivePostsAllowCategories::class);
     }
 
-    public function bootHivePostsLivewireComponents()
+    public function bootHivePostsBladeAndLivewireComponents()
     {
-      Livewire::component('hive-posts-user-post-index', HivePostsLivewire\User\Posts\IndexPost::class);
-      Livewire::component('hive-posts-user-post-create', HivePostsLivewire\User\Posts\CreatePost::class);
-      Livewire::component('hive-posts-user-post-show', HivePostsLivewire\User\Posts\ShowPost::class);
-      Livewire::component('hive-posts-user-post-edit', HivePostsLivewire\User\Posts\EditPost::class);
-      Livewire::component('hive-posts-user-category-create', HivePostsLivewire\User\Categories\CreateCategory::class);
-      Livewire::component('hive-posts-user-category-show', HivePostsLivewire\User\Categories\ShowCategory::class);
-      Livewire::component('hive-posts-user-category-edit', HivePostsLivewire\User\Categories\EditCategory::class);
-      Livewire::component('hive-posts-user-category-index', HivePostsLivewire\User\Categories\IndexCategory::class);
-    }
+       $prefix = config('hive-posts-components.prefix', 'hive-calendar');
+
+       foreach (config('hive-posts-components.livewire', []) as $alias => $component)
+       {
+          $alias = $prefix ? "$prefix-$alias" : $alias;
+          Livewire::component($alias, $component);
+        }
+
+       foreach (config('hive-posts-components.blade', []) as $alias => $component)
+       {
+          $alias = $prefix ? "$prefix-$alias" : $alias;
+          Blade::component($alias, $component);
+        }
+     }
+
+
 }

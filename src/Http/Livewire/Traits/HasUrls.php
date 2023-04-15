@@ -13,15 +13,21 @@ trait HasUrls
   public function mountHasUrls()
   {
     $this->listsForFields['urls'] = [];
+    $this->urls = [];
   }
 
   public function saveElementHasUrls($elementSaving)
   {
-    $url = strpos($url, 'http') !== 0 ? "https://$this->url" : $this->url;
-    if(filter_var($url, FILTER_VALIDATE_URL)) {
-    //valid
-    } else {
-        //not valid
+    foreach($this->urls as $url){
+      $httpexists = strpos($url, 'http') !== 0 ? "https://".$this->url : $url;
+      // Remove all illegal characters from a url
+      $url = filter_var($url, FILTER_SANITIZE_URL);
+
+      if(filter_var($url, FILTER_VALIDATE_URL)) {
+      //valid
+      } else {
+          //not valid
+      }
     }
 
     // 'urls.*.link' => Rule::forEach(function ($value, $attribute) {

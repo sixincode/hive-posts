@@ -11,7 +11,7 @@ class ShowPost extends Component
 
   public function mount(Post $post = null)
   {
-    $this->post = $post->load(['categories','tags']);
+    $this->post = $post;
   }
 
   public function render()

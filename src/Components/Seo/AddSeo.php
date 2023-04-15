@@ -6,13 +6,29 @@ use Illuminate\View\Component;
 
 class AddSeo extends Component
 {
-  public $meta;
+  // public $meta = [
+  //   'title' => '',
+  //   'content' => '',
+  //   'url' => '',
+  //   'slug' => '',
+  // ];
 
   public function __construct(
-    array $meta = []
+    // $title = null,
+    // $content = null,
+    // $slug = null,
+    // $url = null,
   )
   {
-
+    // $this->meta = [
+    //   'title'   => $title,
+    //   'content' => $content,
+    //   'slug'    => $slug,
+    //   'url'     => $url,
+    // ];
+    // if(!$this->meta['url']){
+    //   $this->meta['url'] = env('APP_URL');
+    // }
   }
 
   public function render()

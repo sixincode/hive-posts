@@ -33,11 +33,9 @@ trait HasCategories
    public function attachCategories(array | ArrayAccess | Category $categories): static
    {
        $className = static::getCategoryClassName();
-
-       $categoriesIds = Category::whereIn('slug',$this->categories)->pluck('id')->toArray();
-
+       // $categoriesIds = Category::whereIn('slug',$categories)->pluck('id')->toArray();
+       $categoriesIds = Category::whereIn('slug',$categories)->get();
        $this->categories()->syncWithoutDetaching($categoriesIds);
-
        return $this;
    }
 

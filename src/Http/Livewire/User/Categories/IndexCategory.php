@@ -11,7 +11,7 @@ class IndexCategory extends Component
 
   public function mount($categories = null)
   {
-    $this->categories = Category::all();
+    $this->categories = Category::all()->sortByDesc('created_at');
   }
 
   public function render()

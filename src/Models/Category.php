@@ -9,6 +9,7 @@ use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
 use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
 use Sixincode\HiveHelpers\Traits\sortOrderTrait;
 use Sixincode\HiveHelpers\Traits\HasSlugTrait;
+use Sixincode\HivePosts\Traits\HasTags;
 
 class Category extends HiveModel
 {
@@ -18,6 +19,7 @@ class Category extends HiveModel
   use IsPrivateTrait;
   use sortOrderTrait;
   use HasSlugTrait;
+  use HasTags;
 
   public function __construct()
   {
@@ -42,7 +44,33 @@ class Category extends HiveModel
     $this->fillable[] = 'slogan';
     $this->fillable[] = 'description';
     $this->fillable[] = 'type';
+
+    $this->appends[] = 'color';
+
   }
+
+  public function getColorAttribute()
+  {
+    return $this->properties->color;
+  }
+
+  public function setColorAttribute()
+  {
+    dd('rrrr');
+    $this->properties->color = '00898';
+    return $this->save();
+  }
+
+  public function posts()
+   {
+   return $this->morphedByMany(
+                     \Sixincode\HivePosts\Models\Post::class,
+                     config('hive-posts.column_names.category_identifier'),
+                     config('hive-posts.table_names.categoriesx')
+                    )->withPivot(
+                        config('hive-helpers.column_names.properties_schema')
+                    );
+   }
   protected $appends = [];
   protected $orderable = [];
   protected $filterable = [];
@@ -69,8 +97,8 @@ class Category extends HiveModel
   public function getRoutingArray()
   {
     return [
-      "index"   => route("categories.index"),
-      "create"  => route("categories.create"),
+      "index"   => route("user.categories.index"),
+      "create"  => route("user.categories.create"),
     ];
   }
 

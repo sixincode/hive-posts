@@ -45,30 +45,36 @@ Route::middleware(
       config('hive-posts.routes.user.middlewares.allow_categories', ['allow_categories']),
     )->prefix(
       config('hive-posts.routes.user.categories.prefix', 'categories')
-    )->group(function () {
+    )->name('categories.')->group(function () {
 
       if(config('hive-posts.routes.user.categories.index', false))
         {
           Route::get('/',  [Controllers\Categories\CategoriesUserController::class, 'indexUserCategory'])
-               ->name('categories.index');
+               ->name('index');
         }
 
       if(config('hive-posts.routes.user.categories.create', false))
         {
           Route::get('/create',  [Controllers\Categories\CategoriesUserController::class, 'createUserCategory'])
-               ->name('categories.create');
+               ->name('create');
         }
 
       if(config('hive-posts.routes.user.categories.show', false))
         {
           Route::get('/{category}',  [Controllers\Categories\CategoriesUserController::class, 'showUserCategory'])
-               ->name('categories.show');
+               ->name('show');
         }
+
+        if(config('hive-posts.routes.user.categories.edit', false))
+          {
+            Route::get('/{category}/edit',  [Controllers\Categories\CategoriesUserController::class, 'editUserCategory'])
+                 ->name('edit');
+          }
 
         if(config('hive-posts.routes.user.categories.delete', false))
           {
             Route::get('/{category}/delete',  [Controllers\Categories\CategoriesUserController::class, 'deleteUserCategory'])
-                 ->name('categories.delete');
+                 ->name('delete');
           }
     });
   });

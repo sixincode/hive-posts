@@ -17,6 +17,13 @@ class PostsUserController extends Controller
     return view('hive-posts::user.posts.createUserPost');
   }
 
+  public function editUserPost($post)
+  {
+    return view('hive-posts::user.posts.editUserPost',[
+      'post' => $post
+    ]);
+  }
+
   public function showUserPost($post)
   {
     return view('hive-posts::user.posts.showUserPost',[

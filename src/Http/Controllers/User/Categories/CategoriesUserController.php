@@ -17,12 +17,21 @@ class CategoriesUserController extends Controller
     return view('hive-posts::user.categories.createUserCategory');
   }
 
-  public function showUserCategory()
+  public function editUserCategory($category)
   {
-    return view('hive-posts::user.categories.showUserCategory');
+    return view('hive-posts::user.categories.editUserCategory',[
+      'category' => $category
+    ]);
   }
 
-  public function deleteUserCategory()
+  public function showUserCategory($category)
+  {
+    return view('hive-posts::user.categories.showUserCategory',[
+      'category' => $category
+    ]);
+  }
+
+  public function deleteUserCategory($category)
   {
 
   }
