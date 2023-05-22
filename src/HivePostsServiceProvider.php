@@ -10,6 +10,8 @@ use Sixincode\HivePosts\Http\Middlewares as HivePostsMiddlewares;
 use Livewire\Livewire;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+use Sixincode\HivePosts\Traits\HivePostsDatabase;
+use Illuminate\Database\Schema\Blueprint;
 
 class HivePostsServiceProvider extends PackageServiceProvider
 {
@@ -64,6 +66,29 @@ class HivePostsServiceProvider extends PackageServiceProvider
           Blade::component($alias, $component);
         }
      }
+
+     private function registerHiveCalendarDatabaseMethods(): void
+     {
+       Blueprint::macro('addTagsFields', function (Blueprint $table, $properties = []) {
+         HivePostsDatabase::addTagsFields($table, $properties);
+       });
+
+       Blueprint::macro('addCategoriesFields', function (Blueprint $table, $properties = []) {
+         HivePostsDatabase::addCategoriesFields($table, $properties);
+       });
+
+       Blueprint::macro('addPostsFields', function (Blueprint $table, $properties = []) {
+         HivePostsDatabase::addPostsFields($table, $properties);
+       });
+
+       Blueprint::macro('addTagsXFields', function (Blueprint $table, $properties = []) {
+         HivePostsDatabase::addTagsXFields($table, $properties);
+       });
+
+       Blueprint::macro('addCategoriesXFields', function (Blueprint $table, $properties = []) {
+         HivePostsDatabase::addCategoriesXFields($table, $properties);
+       });
+      }
 
 
 }

@@ -2,12 +2,11 @@
 
 namespace Sixincode\HivePosts;
 
-use Sixincode\HivePosts\Database\Seeders\HivePostsDaseSeeder;
+use Sixincode\HivePosts\Traits\HivePostsDatabase;
 
 class HivePosts
 {
-  public function seed()
-  {
-    return HivePostsDaseSeeder::class;
-  }
+  use HivePostsDatabase;
+
+  //
 }
