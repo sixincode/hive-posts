@@ -67,6 +67,7 @@ trait HivePostsDatabase
 
   public static function addPostsFields(Blueprint $table, $properties =[]): void
   {
+    $table->addAlphaModelFields($table);
     $table->descriptionFieldJson('content');
     $table->integer('views')->nullable();
     $table->string('url')->nullable();
