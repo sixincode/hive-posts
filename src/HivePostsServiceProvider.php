@@ -24,6 +24,7 @@ class HivePostsServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_hive-posts_table')
             ->hasCommand(HivePostsCommand::class);
+        $this->bootHivePostsBladeAndLivewireComponents();
     }
 
     public function bootingPackage()
@@ -67,7 +68,7 @@ class HivePostsServiceProvider extends PackageServiceProvider
         }
      }
 
-     private function registerHiveCalendarDatabaseMethods(): void
+     private function registerHivePostsDatabaseMethods(): void
      {
        Blueprint::macro('addTagsFields', function (Blueprint $table, $properties = []) {
          HivePostsDatabase::addTagsFields($table, $properties);
