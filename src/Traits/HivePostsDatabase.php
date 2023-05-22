@@ -14,7 +14,7 @@ trait HivePostsDatabase
 {
   use FieldsTrait, HiveAlphaDatabase;
 
-  public static function addTagsFields(Blueprint $table , $properties =[]): void
+  public static function addTagsFields(Blueprint $table, $properties =[]): void
   {
     $table->addAlphaModelFields($table);
     $table->string('type')->nullable();
@@ -22,9 +22,9 @@ trait HivePostsDatabase
     $table->isDefaultField();
   }
 
-  public static function addTagsXFields(Blueprint $table , $properties =[]): void
+  public static function addTagsXFields(Blueprint $table, $properties =[]): void
   {
-    $table->foreignId(config('hive-posts.column_names.tags_morph_tag'))->constrained($tableNames['tags'])->onDelete('cascade');
+    $table->foreignId(config('hive-posts.column_names.tags_morph_tag'))->constrained(config('hive-posts.table_names.tags'))->onDelete('cascade');
     $table->morphs(config('hive-posts.column_names.tag_identifier'));
 
     $table->unique([
@@ -34,7 +34,7 @@ trait HivePostsDatabase
     ]);
   }
 
-  public static function addCategoriesFields(Blueprint $table , $properties =[]): void
+  public static function addCategoriesFields(Blueprint $table, $properties =[]): void
   {
     $table->addAlphaModelFields($table);
     $table->descriptionFieldJson('slogan');
@@ -49,10 +49,10 @@ trait HivePostsDatabase
     $table->seoField();
   }
 
-  public static function addCategoriesXFields(Blueprint $table , $properties =[]): void
+  public static function addCategoriesXFields(Blueprint $table, $properties =[]): void
   {
     $table->foreignId(config('hive-posts.column_names.categories_morph_category'))
-          ->constrained($tableNames['categories'])
+          ->constrained(config('hive-posts.table_names.categories'))
           ->onDelete('cascade');
 
     $table->morphs(config('hive-posts.column_names.category_identifier'));
@@ -65,7 +65,7 @@ trait HivePostsDatabase
     ]);
   }
 
-  public static function addPostsFields(Blueprint $table , $properties =[]): void
+  public static function addPostsFields(Blueprint $table, $properties =[]): void
   {
     $table->descriptionFieldJson('content');
     $table->integer('views')->nullable();
