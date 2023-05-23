@@ -49,7 +49,7 @@ class Tag extends HiveModel
 
   public static function getTableAttribute()
   {
-    return config('hive-posts.tables_names.tags');
+    return config('hive-posts.table_names.tags');
   }
 
   public function getShortNameAttribute()

@@ -8,6 +8,6 @@ class Tagx extends HiveModelMin
 {
   public function getTable()
   {
-    return config('hive-posts.tables_names.tagsx');
+    return config('hive-posts.table_names.tagsx');
   }
 }

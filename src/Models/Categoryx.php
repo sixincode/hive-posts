@@ -8,6 +8,6 @@ class Categoryx extends HiveModelMin
 {
   public function getTable()
   {
-    return config('hive-posts.tables_names.categoriesx');
+    return config('hive-posts.table_names.categoriesx');
   }
 }

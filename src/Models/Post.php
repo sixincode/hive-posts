@@ -61,7 +61,7 @@ class Post extends HiveModel
 
   public static function getTableAttribute()
   {
-    return config('hive-posts.tables_names.posts');
+    return config('hive-posts.table_names.posts');
   }
 
   public function getShortNameAttribute()

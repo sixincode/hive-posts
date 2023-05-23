@@ -79,7 +79,7 @@ class Category extends HiveModel
 
   public static function getTableAttribute()
   {
-    return config('hive-posts.tables_names.categories');
+    return config('hive-posts.table_names.categories');
   }
 
   public function getDetailsArray()
