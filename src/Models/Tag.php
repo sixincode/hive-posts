@@ -47,7 +47,7 @@ class Tag extends HiveModel
   protected $fillable = [];
   protected $translatable = [];
 
-  public static function getTableAttribute()
+  public function getTable()
   {
     return config('hive-posts.table_names.tags');
   }

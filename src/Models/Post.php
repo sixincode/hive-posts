@@ -59,7 +59,7 @@ class Post extends HiveModel
   public $filterable = [];
   public $orderable = [];
 
-  public static function getTableAttribute()
+  public function getTable()
   {
     return config('hive-posts.table_names.posts');
   }
