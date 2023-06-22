@@ -29,22 +29,26 @@ class Post extends HiveModel
   public function __construct()
   {
     parent::__construct();
-    $this->translatable[] = 'title';
+    $this->translatable[] = 'name';
+    $this->translatable[] = 'description';
     $this->translatable[] = 'content';
 
-    $this->casts['title'] = 'array';
+    $this->casts['name'] = 'array';
+    $this->casts['description'] = 'array';
     $this->casts['content'] = 'array';
 
     $this->filterable[] = 'id';
-    $this->filterable[] = 'title';
+    $this->filterable[] = 'name';
     $this->filterable[] = 'views';
     $this->filterable[] = 'url';
 
     $this->orderable[] = 'id';
-    $this->orderable[] = 'title';
+    $this->orderable[] = 'name';
     $this->orderable[] = 'views';
 
-    $this->fillable[] = 'title';
+    $this->fillable[] = 'name';
+    $this->fillable[] = 'description';
+    $this->fillable[] = 'reference';
     $this->fillable[] = 'content';
     $this->fillable[] = 'views';
     $this->fillable[] = 'url';
@@ -66,13 +70,14 @@ class Post extends HiveModel
 
   public function getShortNameAttribute()
   {
-    return Str::limit($this->title,16,'...') ;
+    return Str::limit($this->name,16,'...') ;
   }
 
   public function getDetailsArray()
   {
     return [
-      "headline"     => $this->title,
+      "headline"     => $this->name,
+      "description"  => $this->description,
       "body"         => $this->content,
       "routes"       => self::getRoutingArray(),
       "icon"         => "posts",
@@ -93,7 +98,7 @@ class Post extends HiveModel
 
   public static function slugOriginElement()
   {
-    return 'title';
+    return 'name';
   }
 
   public function getRouteKeyName()
