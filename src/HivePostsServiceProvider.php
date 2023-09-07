@@ -10,7 +10,7 @@ use Sixincode\HivePosts\Http\Middlewares as HivePostsMiddlewares;
 use Livewire\Livewire;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
-use Sixincode\HivePosts\Traits\HivePostsDatabase;
+use Sixincode\HivePosts\Traits\Database\HivePostsDatabaseTrait;
 use Illuminate\Database\Schema\Blueprint;
 
 class HivePostsServiceProvider extends PackageServiceProvider
@@ -71,23 +71,23 @@ class HivePostsServiceProvider extends PackageServiceProvider
      private function registerHivePostsDatabaseMethods(): void
      {
        Blueprint::macro('addTagsFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabase::addTagsFields($table, $properties);
+         HivePostsDatabaseTrait::addTagsFields($table, $properties);
        });
 
        Blueprint::macro('addCategoriesFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabase::addCategoriesFields($table, $properties);
+         HivePostsDatabaseTrait::addCategoriesFields($table, $properties);
        });
 
        Blueprint::macro('addPostsFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabase::addPostsFields($table, $properties);
+         HivePostsDatabaseTrait::addPostsFields($table, $properties);
        });
 
        Blueprint::macro('addTagsXFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabase::addTagsXFields($table, $properties);
+         HivePostsDatabaseTrait::addTagsXFields($table, $properties);
        });
 
        Blueprint::macro('addCategoriesXFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabase::addCategoriesXFields($table, $properties);
+         HivePostsDatabaseTrait::addCategoriesXFields($table, $properties);
        });
       }
 

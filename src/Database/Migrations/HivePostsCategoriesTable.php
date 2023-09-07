@@ -5,7 +5,7 @@ namespace Sixincode\HivePosts\Database\Migrations;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Sixincode\HivePosts\Traits\HivePostsDatabase;
+use Sixincode\HivePosts\Traits\Database\HivePostsDatabaseTrait;
 
 class HivePostsCategoriesTable
 {
@@ -23,13 +23,13 @@ class HivePostsCategoriesTable
 
       if(!Schema::hasTable($tableNames['categories'])) {
         Schema::create($tableNames['categories'], function (Blueprint $table) {
-          HivePostsDatabase::addCategoriesFields($table);
+          HivePostsDatabaseTrait::addCategoriesFields($table);
         });
       }
 
       if(!Schema::hasTable($tableNames['categoriesx'])) {
         Schema::create($tableNames['categoriesx'], function (Blueprint $table) {
-          HivePostsDatabase::addCategoriesXFields($table);
+          HivePostsDatabaseTrait::addCategoriesXFields($table);
         });
       }
 

@@ -5,7 +5,7 @@ namespace Sixincode\HivePosts\Database\Migrations;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Sixincode\HivePosts\Traits\HivePostsDatabase;
+use Sixincode\HivePosts\Traits\Database\HivePostsDatabaseTrait;
 
 class HivePostsPostsTable
 {
@@ -23,7 +23,7 @@ class HivePostsPostsTable
 
       if(!Schema::hasTable($tableNames['posts'])) {
         Schema::create($tableNames['posts'], function (Blueprint $table) {
-          HivePostsDatabase::addPostsFields($table);
+          HivePostsDatabaseTrait::addPostsFields($table);
         });
       }
 

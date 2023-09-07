@@ -5,7 +5,7 @@ namespace Sixincode\HivePosts\Database\Migrations;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Sixincode\HivePosts\Traits\HivePostsDatabase;
+use Sixincode\HivePosts\Traits\Database\HivePostsDatabaseTrait;
 
 class HivePostsTagsTable
 {
@@ -23,13 +23,13 @@ class HivePostsTagsTable
 
       if(!Schema::hasTable($tableNames['tags'])) {
         Schema::create($tableNames['tags'], function (Blueprint $table) {
-          HivePostsDatabase::addTagsFields($table);
+          HivePostsDatabaseTrait::addTagsFields($table);
         });
       }
 
       if(!Schema::hasTable($tableNames['tagsx'])) {
         Schema::create($tableNames['tagsx'], function (Blueprint $table) {
-          HivePostsDatabase::addTagsXFields($table);
+          HivePostsDatabaseTrait::addTagsXFields($table);
         });
       }
   }

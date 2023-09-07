@@ -2,11 +2,13 @@
 
 namespace Sixincode\HivePosts;
 
-use Sixincode\HivePosts\Traits\HivePostsDatabase;
+// use Sixincode\HivePosts\Traits\Database\HivePostsDatabaseTrait;
+use Sixincode\HivePosts\Traits\Database\HivePostsMigrationsTrait;
 
 class HivePosts
 {
-  use HivePostsDatabase;
+  // use HivePostsDatabaseTrait;
+  use HivePostsMigrationsTrait;
 
   //
 }
