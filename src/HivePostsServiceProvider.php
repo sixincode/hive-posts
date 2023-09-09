@@ -10,7 +10,7 @@ use Sixincode\HivePosts\Http\Middlewares as HivePostsMiddlewares;
 use Livewire\Livewire;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
-use Sixincode\HivePosts\Traits\Database\HivePostsDatabaseTrait;
+use Sixincode\HivePosts\Traits\Database as DatabaseTraits;
 use Illuminate\Database\Schema\Blueprint;
 
 class HivePostsServiceProvider extends PackageServiceProvider
@@ -24,7 +24,8 @@ class HivePostsServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_hive-posts_table')
             ->hasCommand(HivePostsCommand::class);
-        $this->bootHivePostsBladeAndLivewireComponents();
+
+            $this->registerHivePostsDatabaseMethods();
     }
 
     public function bootingPackage()
@@ -38,11 +39,6 @@ class HivePostsServiceProvider extends PackageServiceProvider
       ]);
     }
 
-    public function packageBooted()
-    {
-      $this->bootHivePostsBladeAndLivewireComponents();
-    }
-
     public function bootHivePostsMiddlewares()
     {
       $router = $this->app->make(Router::class);
@@ -51,43 +47,26 @@ class HivePostsServiceProvider extends PackageServiceProvider
       $router->aliasMiddleware('allow_categories', HivePostsMiddlewares\HivePostsAllowCategories::class);
     }
 
-    public function bootHivePostsBladeAndLivewireComponents()
-    {
-       $prefix = config('hive-posts-components.prefix', 'hive-calendar');
-
-       foreach (config('hive-posts-components.livewire', []) as $alias => $component)
-       {
-          $alias = $prefix ? "$prefix-$alias" : $alias;
-          Livewire::component($alias, $component);
-        }
-
-       foreach (config('hive-posts-components.blade', []) as $alias => $component)
-       {
-          $alias = $prefix ? "$prefix-$alias" : $alias;
-          Blade::component($alias, $component);
-        }
-     }
-
      private function registerHivePostsDatabaseMethods(): void
      {
        Blueprint::macro('addTagsFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabaseTrait::addTagsFields($table, $properties);
+         DatabaseTraits\HivePostsDatabaseDefinitions::addTagsFields($table, $properties);
        });
 
        Blueprint::macro('addCategoriesFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabaseTrait::addCategoriesFields($table, $properties);
+        DatabaseTraits\HivePostsDatabaseDefinitions::addCategoriesFields($table, $properties);
        });
 
        Blueprint::macro('addPostsFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabaseTrait::addPostsFields($table, $properties);
+         DatabaseTraits\HivePostsDatabaseDefinitions::addPostsFields($table, $properties);
        });
 
        Blueprint::macro('addTagsXFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabaseTrait::addTagsXFields($table, $properties);
+         DatabaseTraits\HivePostsDatabaseDefinitions::addTagsXFields($table, $properties);
        });
 
        Blueprint::macro('addCategoriesXFields', function (Blueprint $table, $properties = []) {
-         HivePostsDatabaseTrait::addCategoriesXFields($table, $properties);
+         DatabaseTraits\HivePostsDatabaseDefinitions::addCategoriesXFields($table, $properties);
        });
       }
 

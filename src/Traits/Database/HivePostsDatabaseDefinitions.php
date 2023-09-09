@@ -5,7 +5,7 @@ namespace Sixincode\HivePosts\Traits\Database;
 use Illuminate\Database\Schema\Blueprint;
 use Sixincode\HiveHelpers\Traits\FieldsTrait;
 
-trait HivePostsDatabaseTrait
+trait HivePostsDatabaseDefinitions
 {
   use FieldsTrait;
 
