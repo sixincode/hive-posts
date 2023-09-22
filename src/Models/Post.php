@@ -19,7 +19,7 @@ class Post extends HiveModel
   use IsActiveTrait;
   use IsFeaturedTrait;
   use IsPrivateTrait;
-  use sortOrderTrait;
+  use SortOrderTrait;
   use HasSlugTrait;
   use HasCategories;
   use HasTags;
@@ -105,5 +105,4 @@ class Post extends HiveModel
   {
       return 'slug';
   }
-
 }
