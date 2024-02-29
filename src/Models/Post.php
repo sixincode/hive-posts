@@ -6,7 +6,7 @@ use Sixincode\HiveAlpha\Models\HiveModel;
 use Sixincode\HiveHelpers\Traits\IsActiveTrait;
 use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
 use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
-use Sixincode\HiveHelpers\Traits\sortOrderTrait;
+use Sixincode\HiveHelpers\Traits\SortOrderTrait;
 use Sixincode\HiveHelpers\Traits\HasSlugTrait;
 use Sixincode\HiveHelpers\Traits\HasOwnerTrait;
 use Sixincode\HivePosts\Traits\HasCategories;
