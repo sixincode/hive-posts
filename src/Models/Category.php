@@ -7,7 +7,7 @@ use Sixincode\HiveHelpers\Traits\IsActiveTrait;
 use Sixincode\HiveHelpers\Traits\IsDefaultTrait;
 use Sixincode\HiveHelpers\Traits\IsFeaturedTrait;
 use Sixincode\HiveHelpers\Traits\IsPrivateTrait;
-use Sixincode\HiveHelpers\Traits\sortOrderTrait;
+use Sixincode\HiveHelpers\Traits\SortOrderTrait;
 use Sixincode\HiveHelpers\Traits\HasSlugTrait;
 use Sixincode\HivePosts\Traits\HasTags;
 
@@ -17,7 +17,7 @@ class Category extends HiveModel
   use IsDefaultTrait;
   use IsFeaturedTrait;
   use IsPrivateTrait;
-  use sortOrderTrait;
+  use SortOrderTrait;
   use HasSlugTrait;
   use HasTags;
 
